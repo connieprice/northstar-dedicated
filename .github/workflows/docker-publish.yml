@@ -32,6 +32,9 @@ jobs:
       id-token: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Build and push Docker image
         id: build-and-push
         uses: mr-smithers-excellent/docker-build-push@v5
