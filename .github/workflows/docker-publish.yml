@@ -41,6 +41,7 @@ jobs:
         with:
           image: northstar-dedicated
           registry: ghcr.io
+          dockerfile: src/Dockerfile
           directory: src/
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
