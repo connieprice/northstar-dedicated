@@ -38,6 +38,6 @@ jobs:
         with:
           image: northstar-dedicated
           registry: ghcr.io
-          directory: src
+          directory: src/
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
