@@ -33,9 +33,9 @@ RUN cd /nsbuild/src/main/entrypoint && sudo chown -R nsbuild . && abuild -r
 
 FROM alpine:3.15 AS staging
 RUN apk add --no-cache gnutls tzdata ca-certificates sudo
-RUN adduser -D northstar && \
-    echo 'northstar ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/northstar
-RUN mkdir /mnt/titanfall /mnt/mods
+RUN adduser -D container && \
+    echo 'container ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/container
+RUN mkdir /mnt/titanfall
 
 COPY --from=build /etc/apk/keys/ /etc/apk/keys/
 COPY --from=build-wine /nsbuild/packages/main/x86_64/ /tmp/northstar/
@@ -52,10 +52,15 @@ RUN apk add --no-cache /tmp/northstar/*.apk && rm -rf /tmp/northstar
 
 FROM scratch
 COPY --from=staging / /
-USER northstar
+USER container
+ENV HOME /home/container
+WORKDIR /home/container
 RUN /usr/libexec/nsdedi __wineprefix__
 # Note: TF2 doesn't seem to like Docker's userspace port forwarding... I suggest
 # you use host networking for now.
 #EXPOSE 8081/tcp
 #EXPOSE 37015/udp
-ENTRYPOINT ["/usr/libexec/nsdedi", "                                                          "]
+#ENTRYPOINT ["/usr/libexec/nsdedi", "                                                          "]
+
+COPY ./entrypoint.sh /entrypoint.sh
+CMD ["/bin/bash", "/entrypoint.sh"]

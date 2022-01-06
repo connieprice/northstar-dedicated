@@ -51,10 +51,10 @@ func main() {
 	nso, err := MergeOverlay(
 		"/tmp",
 		"/mnt/titanfall",
-		"/usr/lib/northstar",
+		"/mnt/northstar",
 		"/usr/lib/northstar-dedicated-d3d11",
 		"/usr/lib/northstar-dedicated-gfsdk",
-		"/mnt/mods",
+		"/home/container",
 	)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: Failed to merge game files: %v.\n", err)
