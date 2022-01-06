@@ -63,4 +63,4 @@ RUN /usr/libexec/nsdedi __wineprefix__
 #ENTRYPOINT ["/usr/libexec/nsdedi", "                                                          "]
 
 COPY ./entrypoint.sh /entrypoint.sh
-CMD ["/bin/bash", "/entrypoint.sh"]
+CMD ["/bin/ash", "/entrypoint.sh"]
