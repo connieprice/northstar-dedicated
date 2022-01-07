@@ -138,8 +138,8 @@ func main() {
 	xvfb := 9
 
 	fmt.Println("Starting Northstar...")
-	sn, _ := nsc.Get("ns_server_name")
-	updatetitle(sn)
+	//sn, _ := nsc.Get("ns_server_name")
+	//updatetitle(sn)
 	nsi, err := CreateInstance(nso, nsc, true)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v.\n", err)
@@ -149,7 +149,7 @@ func main() {
 	nsi.Output = os.Stdout
 	nsi.Xvfb = &xvfb
 	nsi.InfoCallback = func(ns NSInstanceStatus) {
-		updatetitle(sn + " [" + ns.String() + "]")
+		//updatetitle(sn + " [" + ns.String() + "]")
 	}
 	fmt.Fprintf(os.Stderr, "Error: Failed to run server: %v.\n", nsi.Run())
 	nsi.Close()
